@@ -1,4 +1,5 @@
-import { marqueeTechs, stackGroups } from '../../data/stack';
+import { monoIcons } from '../../data/icons';
+import { marqueeTechs, stackGroups, techLabel } from '../../data/stack';
 import { useLanguage } from '../../hooks/useLanguage';
 import { Card } from '../ui/Card';
 import { Reveal } from '../ui/Reveal';
@@ -23,7 +24,7 @@ export function Stack() {
                 </div>
                 <div className="stack__items">
                   {g.items.map((it) => (
-                    <TechBadge key={it.name} tech={it} />
+                    <TechBadge key={techLabel(it.name, 'en')} tech={it} />
                   ))}
                 </div>
               </Card>
@@ -36,7 +37,7 @@ export function Stack() {
         <div className="marquee">
           {[...marqueeTechs, ...marqueeTechs].map((m, i) => (
             <div key={`${m.name}-${i}`} className="marquee__item">
-              <img src={m.icon} alt="" />
+              <img src={m.icon} alt="" className={monoIcons.has(m.icon) ? 'icon-mono' : undefined} />
               <span className="mono">{m.name}</span>
             </div>
           ))}

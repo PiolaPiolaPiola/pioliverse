@@ -1,8 +1,11 @@
-import type { Dictionary } from '../i18n';
-import { techIcons } from './icons';
+import type { Dictionary, Lang } from '../i18n';
+import { techIcons as I } from './icons';
+
+/** Nombre fijo (marcas) o traducido (conceptos). */
+export type TechName = string | Record<Lang, string>;
 
 export interface Tech {
-  name: string;
+  name: TechName;
   icon?: string;
 }
 
@@ -12,38 +15,51 @@ export interface StackGroup {
   items: Tech[];
 }
 
+export const techLabel = (name: TechName, lang: Lang) => (typeof name === 'string' ? name : name[lang]);
+
 export const stackGroups: StackGroup[] = [
   {
     key: 'backend',
     file: 'api.cs',
     items: [
-      { name: 'C#', icon: techIcons.csharp },
-      { name: '.NET 9 / Core / 4.8', icon: techIcons.dotnet },
-      { name: 'ASP.NET MVC · Razor', icon: techIcons.dotnet },
+      { name: 'C#', icon: I.csharp },
+      { name: '.NET 9 / Core / Framework 4.8', icon: I.dotnet },
+      { name: 'ASP.NET MVC 5', icon: I.dotnet },
+      { name: 'Windows Forms', icon: I.dotnet },
       { name: 'LINQ' },
       { name: 'RESTful APIs' },
       { name: 'JWT · Auth' },
+      { name: { es: 'Jobs programados', en: 'Scheduled jobs' } },
+      { name: 'Java', icon: I.java },
+      { name: 'Spring Boot', icon: I.spring },
+      { name: 'Node.js', icon: I.nodejs },
+      { name: 'Express', icon: I.express },
     ],
   },
   {
     key: 'data',
     file: 'db.sql',
     items: [
-      { name: 'SQL Server', icon: techIcons.sqlserver },
-      { name: 'PostgreSQL', icon: techIcons.postgresql },
+      { name: 'SQL Server', icon: I.sqlserver },
+      { name: 'PostgreSQL', icon: I.postgresql },
+      { name: 'MongoDB', icon: I.mongodb },
+      { name: 'Stored Procedures' },
       { name: 'Dapper' },
       { name: 'Entity Framework Core' },
-      { name: 'Stored Procedures' },
-      { name: 'DBeaver', icon: techIcons.dbeaver },
+      { name: 'DBeaver', icon: I.dbeaver },
     ],
   },
   {
     key: 'frontend',
     file: 'ui.tsx',
     items: [
-      { name: 'React', icon: techIcons.react },
-      { name: 'TypeScript', icon: techIcons.typescript },
-      { name: 'JavaScript', icon: techIcons.javascript },
+      { name: 'HTML5', icon: I.html5 },
+      { name: 'CSS3', icon: I.css3 },
+      { name: 'Razor · MVC 5', icon: I.dotnet },
+      { name: 'React', icon: I.react },
+      { name: 'TypeScript', icon: I.typescript },
+      { name: 'JavaScript', icon: I.javascript },
+      { name: 'Material UI', icon: I.materialui },
       { name: 'DevExpress' },
     ],
   },
@@ -51,48 +67,64 @@ export const stackGroups: StackGroup[] = [
     key: 'tools',
     file: 'tools.sh',
     items: [
-      { name: 'Git', icon: techIcons.git },
-      { name: 'Postman', icon: techIcons.postman },
-      { name: 'Jira', icon: techIcons.jira },
+      { name: 'Git', icon: I.git },
+      { name: 'GitHub', icon: I.github },
+      { name: 'Bitbucket', icon: I.bitbucket },
+      { name: 'Postman', icon: I.postman },
+      { name: 'Jira', icon: I.jira },
       { name: 'NLog' },
+      { name: 'Power Automate' },
       { name: 'Scrum' },
-      { name: 'Claude AI', icon: techIcons.claude },
+      { name: 'Claude AI', icon: I.claude },
     ],
   },
   {
     key: 'architecture',
     file: 'clean.md',
-    items: [{ name: 'SOLID' }, { name: 'Clean Code' }, { name: 'Clean Architecture' }],
+    items: [
+      { name: { es: 'Arquitectura por capas', en: 'Layered architecture' } },
+      { name: 'Clean Architecture' },
+      { name: { es: 'Patrones de diseño', en: 'Design patterns' } },
+      { name: { es: 'Principios SOLID', en: 'SOLID principles' } },
+      { name: 'Clean Code' },
+      { name: 'Code Review' },
+    ],
   },
 ];
 
 /** Logos que desfilan en la cinta animada. */
-export const marqueeTechs: Required<Tech>[] = [
-  { name: 'C#', icon: techIcons.csharp },
-  { name: '.NET', icon: techIcons.dotnet },
-  { name: 'SQL Server', icon: techIcons.sqlserver },
-  { name: 'PostgreSQL', icon: techIcons.postgresql },
-  { name: 'TypeScript', icon: techIcons.typescript },
-  { name: 'React', icon: techIcons.react },
-  { name: 'JavaScript', icon: techIcons.javascript },
-  { name: 'Git', icon: techIcons.git },
-  { name: 'Postman', icon: techIcons.postman },
-  { name: 'Jira', icon: techIcons.jira },
-  { name: 'DBeaver', icon: techIcons.dbeaver },
-  { name: 'Claude', icon: techIcons.claude },
+export const marqueeTechs = [
+  { name: 'C#', icon: I.csharp },
+  { name: '.NET', icon: I.dotnet },
+  { name: 'SQL Server', icon: I.sqlserver },
+  { name: 'PostgreSQL', icon: I.postgresql },
+  { name: 'MongoDB', icon: I.mongodb },
+  { name: 'Java', icon: I.java },
+  { name: 'Spring Boot', icon: I.spring },
+  { name: 'TypeScript', icon: I.typescript },
+  { name: 'React', icon: I.react },
+  { name: 'HTML5', icon: I.html5 },
+  { name: 'CSS3', icon: I.css3 },
+  { name: 'JavaScript', icon: I.javascript },
+  { name: 'Git', icon: I.git },
+  { name: 'GitHub', icon: I.github },
+  { name: 'Bitbucket', icon: I.bitbucket },
+  { name: 'Postman', icon: I.postman },
+  { name: 'Jira', icon: I.jira },
+  { name: 'Claude', icon: I.claude },
 ];
 
 /** Íconos que orbitan la foto en los dos anillos. */
 export const orbitRings = {
   outer: [
-    { name: 'C#', icon: techIcons.csharp, delay: '0s' },
-    { name: '.NET', icon: techIcons.dotnet, delay: '-4s' },
-    { name: 'SQL Server', icon: techIcons.sqlserver, delay: '-8s' },
-    { name: 'React', icon: techIcons.react, delay: '-12s' },
+    { name: 'C#', icon: I.csharp, delay: '0s' },
+    { name: '.NET', icon: I.dotnet, delay: '-4s' },
+    { name: 'SQL Server', icon: I.sqlserver, delay: '-8s' },
+    { name: 'React', icon: I.react, delay: '-12s' },
   ],
   inner: [
-    { name: 'TypeScript', icon: techIcons.typescript, delay: '-3s' },
-    { name: 'Git', icon: techIcons.git, delay: '-10s' },
-    { name: 'Postman', icon: techIcons.postman, delay: '-17s' },
+    { name: 'TypeScript', icon: I.typescript, delay: '-3s' },
+    { name: 'Git', icon: I.git, delay: '-10s' },
+    { name: 'Postman', icon: I.postman, delay: '-17s' },
   ],
 };

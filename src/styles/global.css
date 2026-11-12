@@ -62,6 +62,7 @@ a:hover { color: var(--text); }
 
 :root[data-theme='dark'] .only-light { display: none !important; }
 :root[data-theme='light'] .only-dark { display: none !important; }
+:root[data-theme='dark'] .icon-mono { filter: invert(1); }
 
 /* ===== Utilidades ===== */
 .mono { font-family: var(--font-mono); }

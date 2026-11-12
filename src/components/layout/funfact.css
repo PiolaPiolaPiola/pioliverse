@@ -1,0 +1,38 @@
+.funfact { position: fixed; left: 0; top: 0; z-index: 40; pointer-events: none; }
+
+/* Recorre la pantalla de esquina a esquina sin salirse del viewport. */
+.funfact__drift { --w: 280px; --h: 140px; animation: drift 46s ease-in-out infinite; }
+.funfact__drift:hover { animation-play-state: paused; }
+@keyframes drift {
+  0%, 100% { transform: translate(4vw, 22vh); }
+  25% { transform: translate(calc(96vw - var(--w)), 30vh); }
+  50% { transform: translate(calc(94vw - var(--w)), calc(92vh - var(--h))); }
+  75% { transform: translate(6vw, calc(86vh - var(--h))); }
+}
+
+.funfact__bubble {
+  pointer-events: auto; position: relative; width: var(--w); display: flex; gap: 10px; align-items: flex-start;
+  padding: 14px 34px 14px 14px; border-radius: 22px 22px 22px 6px;
+  background: var(--surface); border: 2px solid var(--brand); box-shadow: var(--shadow);
+  animation: bob-soft 3s ease-in-out infinite;
+}
+@keyframes bob-soft { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+.funfact__chick { width: 46px; height: 46px; flex: none; }
+.funfact__title { font-weight: 700; font-size: 17px; color: var(--brandText); }
+.funfact__text { margin: 4px 0 0; font-size: 14px; line-height: 1.45; color: var(--text); }
+.funfact__close {
+  position: absolute; top: 6px; right: 6px; width: 28px; height: 28px; border-radius: 50%;
+  border: 0; background: var(--soft); color: var(--brandText); font-size: 18px; line-height: 1; cursor: pointer;
+}
+.funfact__close:hover { background: var(--line); }
+
+@media (max-width: 560px) {
+  .funfact__drift { --w: 230px; --h: 150px; }
+  .funfact__text { font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .funfact { top: auto; left: auto; right: 16px; bottom: 16px; }
+  .funfact__drift { animation: none; }
+}

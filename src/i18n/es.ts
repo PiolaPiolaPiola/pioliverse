@@ -11,8 +11,8 @@ export const es = {
   hero: {
     available: 'Disponible para nuevos retos',
     intro: 'Construyo APIs, automatizo procesos y hago que los datos vuelen. Más de 2 años llevando features y hotfixes a producción con C#, .NET y SQL Server.',
-    quote: 'Cada vez que conozco un sol, me doy cuenta de que me quedan mil estrellas más por explorar.',
-    quoteBy: '// el pioliverse',
+    quote: 'Cada sol que conozco solo me recuerda que aún me quedan mil estrellas por descubrir.',
+    quoteBy: '// Piola (Aleja)',
     ctaProjects: 'Abrir bóvedas',
     ctaCv: 'Descargar CV',
     logoAlt: 'Pollito del Pioliverse',
@@ -20,6 +20,11 @@ export const es = {
   about: {
     label: '01 · sobre_mí',
     title: 'Hola, soy Aleja',
+    p0: [
+      'Mi nombre es Alejandra, aunque en el mundo tech me conocen como ',
+      { b: 'Piola' },
+      ': el nombre detrás de mi marca personal, el Pioliverse, y del pollito que me acompaña en cada proyecto.',
+    ],
     p1: [
       'Soy desarrolladora backend .NET. Me gusta que las cosas funcionen bien por dentro: ',
       { b: 'APIs RESTful' },
@@ -35,7 +40,8 @@ export const es = {
       base: '"Medellín, CO"',
       powers: '["APIs REST", "SQL tuning", "Clean Code"]',
       studies: '"Ingeniería de Software"',
-      keys: { rol: 'Rol', base: 'Base', powers: 'Superpoderes', studies: 'Estudia' },
+      nickname: '"piopiopiola"',
+      keys: { nickname: 'Nickname', rol: 'Rol', base: 'Base', powers: 'Superpoderes', studies: 'Estudia' },
     },
     stats: [
       { value: '2+', label: 'años en .NET' },
@@ -66,7 +72,7 @@ export const es = {
         period: 'mar 2024 – ago 2026',
         role: 'Desarrolladora de Software',
         commits: [
-          { type: 'feat(api)', msg: 'APIs RESTful para gestión académica, validación de estudiantes y responsables, e integración con Comfama' },
+          { type: 'feat(api)', msg: 'APIs RESTful para Comfama, gestión académica y validación de estudiantes, familiares y responsables jurídicos' },
           { type: 'feat(jobs)', msg: 'Job mensual de facturación electrónica integrado con la DIAN que eliminó la operación manual de cartera' },
           { type: 'feat(notify)', msg: 'co-desarrollo de la central de notificaciones masivas programadas por país' },
           { type: 'feat(integ)', msg: 'firma electrónica con AUCO y alternativas de crédito institucional con Giitic' },
@@ -139,8 +145,13 @@ export const es = {
     cv: 'Descargar mi CV (PDF)',
   },
   footer: {
-    made: '© 2026 Pioliverse · hecho con cariño, café y C#',
+    made: '© 2026 Pioliverse · hecho con cariño, café e IA',
     bye: 'return "gracias por visitar";',
+  },
+  funFact: {
+    title: '¿Sabías qué?',
+    text: 'Una de mis pasiones son los idiomas: hablo español, inglés, italiano básico y portugués básico.',
+    close: 'Cerrar dato curioso',
   },
 };
 

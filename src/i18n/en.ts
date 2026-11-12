@@ -13,8 +13,8 @@ export const en: Dictionary = {
   hero: {
     available: 'Open to new challenges',
     intro: 'I build APIs, automate processes and make data fly. 2+ years shipping features and hotfixes to production with C#, .NET and SQL Server.',
-    quote: 'Every time I get to know a sun, I realize there are a thousand more stars left to explore.',
-    quoteBy: '// the pioliverse',
+    quote: 'Every sun I get to know only reminds me there are still a thousand stars left to discover.',
+    quoteBy: '// Piola (Aleja)',
     ctaProjects: 'Open the vaults',
     ctaCv: 'Download CV',
     logoAlt: 'Pioliverse chick',
@@ -22,6 +22,11 @@ export const en: Dictionary = {
   about: {
     label: '01 · about_me',
     title: "Hi, I'm Aleja",
+    p0: [
+      'My name is Alejandra, though in the tech world I am known as ',
+      { b: 'Piola' },
+      ': the name behind my personal brand, the Pioliverse, and the little chick that joins me on every project.',
+    ],
     p1: [
       "I'm a backend .NET developer. I love things that work well on the inside: clear ",
       { b: 'RESTful APIs' },
@@ -37,7 +42,8 @@ export const en: Dictionary = {
       base: '"Medellín, CO"',
       powers: '["REST APIs", "SQL tuning", "Clean Code"]',
       studies: '"Software Engineering"',
-      keys: { rol: 'Role', base: 'Base', powers: 'Superpowers', studies: 'Studies' },
+      nickname: '"piopiopiola"',
+      keys: { nickname: 'Nickname', rol: 'Role', base: 'Base', powers: 'Superpowers', studies: 'Studies' },
     },
     stats: [
       { value: '2+', label: 'years in .NET' },
@@ -68,7 +74,7 @@ export const en: Dictionary = {
         period: 'Mar 2024 – Aug 2026',
         role: 'Software Developer',
         commits: [
-          { type: 'feat(api)', msg: 'RESTful APIs for academic management, student and guardian validation, and Comfama integration' },
+          { type: 'feat(api)', msg: 'RESTful APIs for Comfama, academic management and validation of students, relatives and legal guardians' },
           { type: 'feat(jobs)', msg: 'monthly e-invoicing job integrated with DIAN that removed the manual work of the billing team' },
           { type: 'feat(notify)', msg: 'co-built the mass notification hub with jobs scheduled per country' },
           { type: 'feat(integ)', msg: 'e-signature with AUCO and institutional credit options with Giitic' },
@@ -141,7 +147,12 @@ export const en: Dictionary = {
     cv: 'Download my CV (PDF)',
   },
   footer: {
-    made: '© 2026 Pioliverse · made with love, coffee and C#',
+    made: '© 2026 Pioliverse · made with love, coffee and AI',
     bye: 'return "thanks for visiting";',
+  },
+  funFact: {
+    title: 'Did you know?',
+    text: 'Languages are one of my passions: I speak Spanish, English, basic Italian and basic Portuguese.',
+    close: 'Close fun fact',
   },
 };

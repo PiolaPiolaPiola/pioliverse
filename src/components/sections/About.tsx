@@ -5,6 +5,13 @@ import { SectionHeader } from '../ui/SectionHeader';
 import { OrbitPhoto } from './OrbitPhoto';
 import './sections.css';
 
+type RichPart = string | { b: string };
+
+/** Texto con fragmentos en negrilla definidos en el diccionario. */
+function RichText({ parts }: { parts: RichPart[] }) {
+  return <>{parts.map((part, i) => (typeof part === 'string' ? part : <strong key={i}>{part.b}</strong>))}</>;
+}
+
 export function About() {
   const { t } = useLanguage();
   const { record } = t.about;
@@ -20,7 +27,12 @@ export function About() {
           <SectionHeader label={t.about.label} title={t.about.title} />
           <Reveal delay={0.1}>
             <p className="lead">
-              {t.about.p1.map((part, i) => (typeof part === 'string' ? part : <strong key={i}>{part.b}</strong>))}
+              <RichText parts={t.about.p0} />
+            </p>
+          </Reveal>
+          <Reveal delay={0.12}>
+            <p className="lead">
+              <RichText parts={t.about.p1} />
             </p>
           </Reveal>
           <Reveal delay={0.15}>
@@ -31,6 +43,7 @@ export function About() {
               <div>
                 <span style={{ color: '#FE91B1' }}>public record</span> <span style={{ color: '#FED715' }}>Aleja</span>(
               </div>
+              <div className="code-card__line"><span className="code-card__key">{record.keys.nickname}</span>: {record.nickname},</div>
               <div className="code-card__line"><span className="code-card__key">{record.keys.rol}</span>: {record.rol},</div>
               <div className="code-card__line"><span className="code-card__key">{record.keys.base}</span>: {record.base},</div>
               <div className="code-card__line"><span className="code-card__key">{record.keys.powers}</span>: {record.powers},</div>

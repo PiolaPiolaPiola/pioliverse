@@ -1,4 +1,5 @@
 import { Footer } from './components/layout/Footer';
+import { FunFact } from './components/layout/FunFact';
 import { Navbar } from './components/layout/Navbar';
 import { About } from './components/sections/About';
 import { Contact } from './components/sections/Contact';
@@ -20,6 +21,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <FunFact />
     </>
   );
 }
