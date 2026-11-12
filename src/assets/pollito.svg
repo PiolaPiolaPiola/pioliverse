@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Pollito Pioliverse">
+  <g stroke-linejoin="round" stroke-linecap="round">
+    <!-- copete -->
+    <path d="M222 122 C196 112 190 84 212 76 C222 72 232 78 236 86 C236 64 262 56 274 72 C284 86 278 106 266 120 Z" fill="#FED715" stroke="#AF8301" stroke-width="8"/>
+    <!-- alas -->
+    <path d="M142 212 C112 208 74 232 56 250 C44 262 46 280 60 290 C82 304 112 318 140 320 C152 300 154 232 142 212 Z" fill="#FED715" stroke="#AF8301" stroke-width="8"/>
+    <path d="M370 212 C400 208 438 232 456 250 C468 262 466 280 452 290 C430 304 400 318 372 320 C360 300 358 232 370 212 Z" fill="#FED715" stroke="#AF8301" stroke-width="8"/>
+    <path d="M106 238 L72 264 L106 290" fill="none" stroke="#E4FDB6" stroke-width="13"/>
+    <path d="M406 238 L440 264 L406 290" fill="none" stroke="#E4FDB6" stroke-width="13"/>
+    <!-- cuerpo -->
+    <path d="M256 98 C346 98 394 176 394 266 C394 356 334 402 256 402 C178 402 118 356 118 266 C118 176 166 98 256 98 Z" fill="#FED715" stroke="#AF8301" stroke-width="8"/>
+    <!-- flor -->
+    <path d="M338 100 C354 82 378 86 388 94 C376 110 356 114 338 100 Z" fill="#6BAE1A" stroke="#4E8A0C" stroke-width="4"/>
+    <g fill="#FE91B1" stroke="#E0457B" stroke-width="4">
+      <circle cx="318" cy="94" r="18"/>
+      <circle cx="339" cy="109" r="18"/>
+      <circle cx="331" cy="134" r="18"/>
+      <circle cx="305" cy="134" r="18"/>
+      <circle cx="297" cy="109" r="18"/>
+    </g>
+    <circle cx="318" cy="116" r="11" fill="#FED715" stroke="#E0457B" stroke-width="3"/>
+    <!-- ojos -->
+    <ellipse cx="214" cy="212" rx="15" ry="21" fill="#161616"/>
+    <ellipse cx="298" cy="212" rx="15" ry="21" fill="#161616"/>
+    <circle cx="219" cy="204" r="4.5" fill="#fff"/>
+    <circle cx="303" cy="204" r="4.5" fill="#fff"/>
+    <g stroke="#161616" stroke-width="4" fill="none">
+      <path d="M202 196 L192 188"/><path d="M206 192 L200 182"/>
+      <path d="M310 196 L320 188"/><path d="M306 192 L312 182"/>
+    </g>
+    <!-- cachetes -->
+    <ellipse cx="178" cy="252" rx="21" ry="12" fill="#FE91B1" opacity="0.85"/>
+    <ellipse cx="334" cy="252" rx="21" ry="12" fill="#FE91B1" opacity="0.85"/>
+    <!-- pico -->
+    <ellipse cx="256" cy="256" rx="46" ry="26" fill="#FE6F0A" stroke="#D14400" stroke-width="7"/>
+    <ellipse cx="240" cy="247" rx="12" ry="5" fill="#FFA766" opacity="0.8"/>
+    <!-- patas -->
+    <path d="M172 430 C160 410 165 378 180 370 C185 357 200 354 206 364 C214 354 230 358 232 372 C246 380 248 410 236 430 C222 446 186 446 172 430 Z" fill="#FE6F0A" stroke="#D14400" stroke-width="7"/>
+    <path d="M276 430 C264 410 269 378 284 370 C289 357 304 354 310 364 C318 354 334 358 336 372 C350 380 352 410 340 430 C326 446 290 446 276 430 Z" fill="#FE6F0A" stroke="#D14400" stroke-width="7"/>
+  </g>
+</svg>
