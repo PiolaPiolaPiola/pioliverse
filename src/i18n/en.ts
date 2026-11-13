@@ -146,6 +146,11 @@ export const en: Dictionary = {
     phone: 'Phone / WhatsApp',
     cv: 'Download my CV (PDF)',
   },
+  dreams: {
+    label: '// dreams_in_progress',
+    title: 'What keeps me going',
+    items: ['Becoming a polyglot', 'Making an impact with what I do', 'Being a quantum programmer', 'Teaching', 'Traveling a lot'],
+  },
   footer: {
     made: '© 2026 Pioliverse · made with love, coffee and AI',
     bye: 'return "thanks for visiting";',
