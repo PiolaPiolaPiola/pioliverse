@@ -144,6 +144,11 @@ export const es = {
     phone: 'Teléfono / WhatsApp',
     cv: 'Descargar mi CV (PDF)',
   },
+  dreams: {
+    label: '// sueños_en_progreso',
+    title: 'Lo que me mueve',
+    items: ['Ser poliglota', 'Impactar con lo que hago', 'Ser programadora cuántica', 'Enseñar', 'Viajar mucho'],
+  },
   footer: {
     made: '© 2026 Pioliverse · hecho con cariño, café e IA',
     bye: 'return "gracias por visitar";',
