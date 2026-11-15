@@ -1,0 +1,16 @@
+.toast-region {
+  position: fixed; left: 50%; bottom: 24px; z-index: 60; transform: translateX(-50%);
+  width: min(420px, calc(100vw - 32px)); pointer-events: none;
+}
+.toast {
+  pointer-events: auto; position: relative; display: flex; align-items: center; gap: 12px;
+  padding: 12px 40px 12px 14px; border-radius: 18px;
+  background: var(--surface); border: 2px solid var(--brand); box-shadow: var(--shadow);
+}
+.toast__chick { width: 40px; height: 40px; flex: none; animation: bob 1.6s ease-in-out infinite; }
+.toast__message { margin: 0; font-size: 15px; line-height: 1.4; font-weight: 600; color: var(--text); }
+.toast__close {
+  position: absolute; top: 50%; right: 8px; width: 26px; height: 26px; margin-top: -13px; border-radius: 50%;
+  border: 0; background: var(--soft); color: var(--brandText); font-size: 17px; line-height: 1; cursor: pointer;
+}
+.toast__close:hover { background: var(--line); }

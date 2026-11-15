@@ -9,10 +9,10 @@ import { Sparkle } from '../ui/Sparkle';
 import './sections.css';
 
 const glyphs = [
-  { text: '{ }', className: 'float', style: { left: '3%', top: '18%', fontSize: 40 } },
-  { text: '</>', className: 'float-slow', style: { left: '44%', top: '78%', fontSize: 34 } },
-  { text: '=>', className: 'float', style: { right: '5%', top: '12%', fontSize: 30, animationDelay: '-2s' } },
-  { text: ';', className: 'float-slow', style: { right: '20%', top: '8%', fontSize: 30, animationDelay: '-4s' } },
+  { text: '{ }', name: 'braces', className: 'float' },
+  { text: '</>', name: 'tag', className: 'float-slow' },
+  { text: '=>', name: 'arrow', className: 'float' },
+  { text: ';', name: 'semi', className: 'float-slow' },
 ];
 
 export function Hero() {
@@ -21,7 +21,7 @@ export function Hero() {
   return (
     <section id="inicio" className="hero dotgrid">
       {glyphs.map((g) => (
-        <div key={g.text} aria-hidden="true" className={`mono hero__glyph ${g.className}`} style={g.style}>
+        <div key={g.text} aria-hidden="true" className={`mono hero__glyph hero__glyph--${g.name} ${g.className}`}>
           {g.text}
         </div>
       ))}

@@ -107,15 +107,18 @@ export const es = {
         ],
       },
     ],
-    studiesCmd: '$ git branch --estudios',
-    studies: [
-      { title: 'Ingeniería de Software', detail: 'Politécnico Grancolombiano · en curso' },
-      { title: 'Diplomado: de la Arquitectura al Fullstack en producción', detail: 'Cedesistemas / Cetia · 113 h' },
-      { title: 'Inglés técnico intermedio', detail: 'EF' },
+  },
+  studies: {
+    label: '04 · git branch --estudios',
+    title: 'Mi formación',
+    items: [
+      { branch: 'estudios/ingenieria-software', title: 'Ingeniería de Software', detail: 'Politécnico Grancolombiano · en curso' },
+      { branch: 'estudios/diplomado-fullstack', title: 'Diplomado: de la Arquitectura al Fullstack en producción', detail: 'Cedesistemas / Cetia · 113 h' },
+      { branch: 'estudios/ingles', title: 'Inglés técnico intermedio', detail: 'EF' },
     ],
   },
   projects: {
-    label: '04 · bóvedas_del_pioliverse',
+    label: '05 · bóvedas_del_pioliverse',
     title: 'Proyectos desbloqueados',
     progress: '1 / ∞ niveles completados',
     level: 'NIVEL',
@@ -141,7 +144,7 @@ export const es = {
     },
   },
   contact: {
-    label: '05 · contacto',
+    label: '06 · contacto',
     title: '¿Hacemos merge?',
     text: 'Si tienes un reto backend, un equipo con buena energía o una idea por construir, escríbeme. Respondo más rápido que un pollito con café.',
     email: 'Correo',
@@ -157,6 +160,7 @@ export const es = {
       error: 'Algo falló. Intenta de nuevo o escríbeme por LinkedIn.',
       invalid: 'Revisa los datos: un correo válido y un mensaje de al menos 10 caracteres.',
       wait: 'Ya recibí tu mensaje. Espera unos segundos antes de enviar otro.',
+      hint: 'Solo letras, números y signos de puntuación comunes.',
     },
     cv: 'Descargar mi CV (PDF)',
   },
@@ -168,6 +172,13 @@ export const es = {
   footer: {
     made: '© 2026 Pioliverse · hecho con cariño, café e IA',
     bye: 'return "gracias por visitar";',
+  },
+  toast: {
+    close: 'Cerrar aviso',
+  },
+  visitor: {
+    welcome: (n: number) => `¡Bienvenid@ al Pioliverse! Eres el visitante #${n} 🐥`,
+    badge: (n: number) => `visitante #${n}`,
   },
   funFact: {
     title: '¿Sabías qué?',
