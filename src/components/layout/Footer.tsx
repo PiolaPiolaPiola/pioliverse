@@ -2,7 +2,12 @@ import { useLanguage } from '../../hooks/useLanguage';
 import { Logo } from '../ui/Logo';
 import './layout.css';
 
-export function Footer({ visitor }: { visitor: number | null }) {
+interface FooterProps {
+  visitor: number | null;
+  total: number | null;
+}
+
+export function Footer({ visitor, total }: FooterProps) {
   const { t } = useLanguage();
   return (
     <footer className="footer">
@@ -14,7 +19,12 @@ export function Footer({ visitor }: { visitor: number | null }) {
           </span>
         </div>
         <div className="footer__end">
-          {visitor !== null && <span className="mono footer__visitor">{t.visitor.badge(visitor)}</span>}
+          {visitor !== null && (
+            <span className="mono footer__visitor">
+              {t.visitor.badge(visitor)}
+              {total !== null && ` · ${t.visitor.total(total)}`}
+            </span>
+          )}
           <span className="mono" style={{ fontSize: 13, color: 'var(--brandText)' }}>
             {t.footer.bye}
           </span>

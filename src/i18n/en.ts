@@ -181,6 +181,7 @@ export const en: Dictionary = {
   visitor: {
     welcome: (n: number) => `Welcome to the Pioliverse! You are visitor #${n} 🐥`,
     badge: (n: number) => `visitor #${n}`,
+    total: (n: number) => `${n} ${n === 1 ? 'visit' : 'visits'}`,
   },
   funFact: {
     title: 'Did you know?',

@@ -179,6 +179,7 @@ export const es = {
   visitor: {
     welcome: (n: number) => `¡Bienvenid@ al Pioliverse! Eres el visitante #${n} 🐥`,
     badge: (n: number) => `visitante #${n}`,
+    total: (n: number) => `${n} ${n === 1 ? 'visita' : 'visitas'}`,
   },
   funFact: {
     title: '¿Sabías qué?',

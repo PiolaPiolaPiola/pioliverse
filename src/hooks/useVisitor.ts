@@ -3,13 +3,24 @@ import { useLanguage } from './useLanguage';
 import { useToast } from './useToast';
 
 const STORAGE_KEY = 'pv-visitor';
+const ENDPOINT = '/api/visits';
 
-let visitRequest: Promise<number | null> | null = null;
+interface VisitResult {
+  visitor: number;
+  total: number;
+}
+
+let visitRequest: Promise<VisitResult | null> | null = null;
+let totalRequest: Promise<number | null> | null = null;
+
+function toPositiveInt(value: unknown) {
+  const n = Number(value);
+  return Number.isInteger(n) && n > 0 ? n : null;
+}
 
 function readStoredVisitor() {
   try {
-    const value = Number(localStorage.getItem(STORAGE_KEY));
-    return Number.isInteger(value) && value > 0 ? value : null;
+    return toPositiveInt(localStorage.getItem(STORAGE_KEY));
   } catch {
     return null;
   }
@@ -23,35 +34,61 @@ function storeVisitor(value: number) {
   }
 }
 
+function readJson(res: Response) {
+  return res.ok ? (res.json() as Promise<Record<string, unknown>>) : null;
+}
+
 function registerVisit() {
-  visitRequest ??= fetch('/api/visits', { method: 'POST' })
-    .then((res) => (res.ok ? res.json() : null))
-    .then((data: { visitor?: unknown } | null) => {
-      const value = Number(data?.visitor);
-      return Number.isInteger(value) && value > 0 ? value : null;
+  visitRequest ??= fetch(ENDPOINT, { method: 'POST' })
+    .then(readJson)
+    .then((data) => {
+      const visitor = toPositiveInt(data?.visitor);
+      if (visitor === null) return null;
+      return { visitor, total: toPositiveInt(data?.total) ?? visitor };
     })
     .catch(() => null);
   return visitRequest;
+}
+
+function fetchTotal() {
+  totalRequest ??= fetch(ENDPOINT)
+    .then(readJson)
+    .then((data) => toPositiveInt(data?.total))
+    .catch(() => null);
+  return totalRequest;
 }
 
 export function useVisitor() {
   const { t } = useLanguage();
   const { showToast } = useToast();
   const [visitor, setVisitor] = useState<number | null>(readStoredVisitor);
+  const [total, setTotal] = useState<number | null>(null);
 
   useEffect(() => {
     if (visitor !== null) return;
     let active = true;
-    registerVisit().then((value) => {
-      if (!active || value === null) return;
-      storeVisitor(value);
-      setVisitor(value);
-      showToast(t.visitor.welcome(value));
+    registerVisit().then((result) => {
+      if (!active || result === null) return;
+      storeVisitor(result.visitor);
+      setVisitor(result.visitor);
+      setTotal(result.total);
+      showToast(t.visitor.welcome(result.visitor));
     });
     return () => {
       active = false;
     };
   }, [visitor, showToast, t]);
 
-  return visitor;
+  useEffect(() => {
+    if (visitor === null || total !== null) return;
+    let active = true;
+    fetchTotal().then((value) => {
+      if (active && value !== null) setTotal(value);
+    });
+    return () => {
+      active = false;
+    };
+  }, [visitor, total]);
+
+  return { visitor, total: total === null || visitor === null ? total : Math.max(total, visitor) };
 }

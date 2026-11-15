@@ -33,6 +33,22 @@ async function hashVisitor(request: Request) {
 }
 
 const noStore = { 'Cache-Control': 'no-store' };
+const shortCache = { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300' };
+
+async function readTotal(config: RedisConfig) {
+  return Number(await redis(config, ['GET', VISITS_KEY])) || 0;
+}
+
+export async function GET() {
+  const config = redisConfig();
+  if (!config) return Response.json({ error: 'not configured' }, { status: 503, headers: noStore });
+
+  try {
+    return Response.json({ total: await readTotal(config) }, { headers: shortCache });
+  } catch {
+    return Response.json({ error: 'unavailable' }, { status: 502, headers: noStore });
+  }
+}
 
 export async function POST(request: Request) {
   const config = redisConfig();
@@ -41,8 +57,9 @@ export async function POST(request: Request) {
   try {
     const seenKey = SEEN_PREFIX + (await hashVisitor(request));
     const isNew = (await redis(config, ['SET', seenKey, '1', 'NX', 'EX', SEEN_TTL_SECONDS])) === 'OK';
-    const count = Number(await redis(config, [isNew ? 'INCR' : 'GET', VISITS_KEY])) || 0;
-    return Response.json({ visitor: Math.max(count, 1) }, { headers: noStore });
+    const count = isNew ? Number(await redis(config, ['INCR', VISITS_KEY])) || 0 : await readTotal(config);
+    const total = Math.max(count, 1);
+    return Response.json({ visitor: total, total }, { headers: noStore });
   } catch {
     return Response.json({ error: 'unavailable' }, { status: 502, headers: noStore });
   }

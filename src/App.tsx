@@ -14,7 +14,7 @@ import { useVisitor } from './hooks/useVisitor';
 
 export default function App() {
   useSmoothAnchors();
-  const visitor = useVisitor();
+  const { visitor, total } = useVisitor();
 
   return (
     <>
@@ -29,7 +29,7 @@ export default function App() {
         <Dreams />
         <Contact />
       </main>
-      <Footer visitor={visitor} />
+      <Footer visitor={visitor} total={total} />
       <FunFact />
     </>
   );
