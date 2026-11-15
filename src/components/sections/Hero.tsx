@@ -9,10 +9,10 @@ import { Sparkle } from '../ui/Sparkle';
 import './sections.css';
 
 const glyphs = [
-  { text: '{ }', className: 'float', style: { left: '6%', top: '18%', fontSize: 40 } },
+  { text: '{ }', className: 'float', style: { left: '3%', top: '18%', fontSize: 40 } },
   { text: '</>', className: 'float-slow', style: { left: '44%', top: '78%', fontSize: 34 } },
   { text: '=>', className: 'float', style: { right: '5%', top: '12%', fontSize: 30, animationDelay: '-2s' } },
-  { text: ';', className: 'float-slow', style: { right: '40%', top: '8%', fontSize: 30, animationDelay: '-4s' } },
+  { text: ';', className: 'float-slow', style: { right: '20%', top: '8%', fontSize: 30, animationDelay: '-4s' } },
 ];
 
 export function Hero() {

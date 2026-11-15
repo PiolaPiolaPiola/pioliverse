@@ -64,12 +64,14 @@ export const en: Dictionary = {
     },
   },
   experience: {
-    label: '03 · git log --experience',
-    title: 'My commit history',
+    label: '03 · gh pr list --experience',
+    title: 'My PRs history',
     at: '@ Q10 S.A.S.',
+    base: 'experience',
     jobs: [
       {
-        hash: 'a3f9c21',
+        pr: 3,
+        branch: 'role/software-developer',
         head: true,
         period: 'Mar 2024 – Aug 2026',
         role: 'Software Developer',
@@ -86,7 +88,8 @@ export const en: Dictionary = {
         ],
       },
       {
-        hash: '7be1d04',
+        pr: 2,
+        branch: 'role/qa-analyst',
         head: false,
         period: 'Dec 2023 – Mar 2024',
         role: 'QA Analyst',
@@ -96,7 +99,8 @@ export const en: Dictionary = {
         ],
       },
       {
-        hash: '2c88e10',
+        pr: 1,
+        branch: 'role/hr-marketing',
         head: false,
         period: 'Aug 2021 – Dec 2023',
         role: 'HR & Marketing Assistant',
@@ -109,7 +113,7 @@ export const en: Dictionary = {
     studies: [
       { title: 'Software Engineering', detail: 'Politécnico Grancolombiano · in progress' },
       { title: 'Diploma: From Architecture to Fullstack in production', detail: 'Cedesistemas / Cetia · 113 h' },
-      { title: 'Technical English B1', detail: 'EF' },
+      { title: 'Technical English B1 Intermediate', detail: 'EF' },
     ],
   },
   projects: {
@@ -143,7 +147,19 @@ export const en: Dictionary = {
     title: "Shall we merge?",
     text: 'If you have a backend challenge, a team with good vibes or an idea to build, write to me. I reply faster than a chick on coffee.',
     email: 'Email',
-    phone: 'Phone / WhatsApp',
+    phone: 'WhatsApp',
+    phoneValue: 'Message me',
+    form: {
+      name: 'Your name',
+      email: 'Your email',
+      message: "What's on your mind?",
+      send: 'Send message',
+      sending: 'Sending…',
+      ok: 'Message received! I will get back to you soon 🐥',
+      error: 'Something went wrong. Try again or reach me on LinkedIn.',
+      invalid: 'Please check your details: a valid email and a message of at least 10 characters.',
+      wait: 'I already got your message. Please wait a few seconds before sending another.',
+    },
     cv: 'Download my CV (PDF)',
   },
   dreams: {

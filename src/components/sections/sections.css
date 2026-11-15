@@ -4,8 +4,9 @@
 
 /* ===== Hero ===== */
 .hero { position: relative; overflow: hidden; }
-.hero__glyph { position: absolute; color: var(--line); font-weight: 700; }
-.hero__inner { padding-top: 96px; padding-bottom: 110px; display: flex; flex-wrap: wrap; align-items: center; gap: 48px; }
+.hero__glyph { position: absolute; z-index: 0; color: var(--line); font-weight: 700; opacity: .7; }
+.hero__inner { position: relative; z-index: 1; padding-top: 96px; padding-bottom: 110px; display: flex; flex-wrap: wrap; align-items: center; gap: 48px; }
+@media (max-width: 900px) { .hero__glyph { display: none; } }
 .hero__copy { flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 22px; }
 .hero__title { margin: 0; font-size: clamp(46px, 6.4vw, 84px); line-height: 1; font-weight: 700; }
 .hero__role { font-size: clamp(20px, 2.4vw, 28px); font-weight: 700; color: var(--brandText); }
@@ -45,7 +46,8 @@
 /* ===== Stack ===== */
 .stack { padding: 110px 0 90px; }
 .stack__inner { display: flex; flex-direction: column; gap: 40px; }
-.stack__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.stack__grid { --cols: 3; display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 20px; }
+.stack__grid > * { flex: 0 0 calc((100% - 20px * (var(--cols) - 1)) / var(--cols)); min-width: 0; }
 .stack__card { padding: 24px; display: flex; flex-direction: column; gap: 16px; width: 100%; }
 .stack__card-head { display: flex; align-items: center; justify-content: space-between; }
 .stack__card-head h3 { margin: 0; font-size: 24px; font-weight: 600; }
@@ -73,17 +75,29 @@
 .job { position: relative; padding: 26px 28px; display: flex; flex-direction: column; gap: 12px; }
 .job__dot { position: absolute; left: -38px; top: 30px; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 4px solid var(--brand); }
 .job__dot--head { background: var(--brand); border-color: var(--bg2); }
-.job__meta { font-size: 13px; color: var(--muted); }
-.job__hash { color: #E0A800; }
+.job__branch { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+.job__branch-name { color: #E0A800; }
+.job__merged { color: var(--brandText); }
+.job__period { margin-top: -6px; font-size: 14px; color: var(--muted); }
 .job__role { margin: 0; font-size: 24px; font-weight: 600; }
 .job__role--head { font-size: 26px; }
 .job__role span { color: var(--muted); font-weight: 500; }
+.job__role .job__pr { font-weight: 400; }
 .job__commits { display: flex; flex-direction: column; gap: 8px; }
 .commit { display: flex; gap: 12px; align-items: baseline; font-size: 15px; line-height: 1.55; }
 .commit__tag {
-  flex: none; font-family: var(--font-mono); font-size: 12px; font-weight: 700; padding: 2px 8px;
+  position: relative; flex: none; min-width: calc(13ch + 16px); text-align: left; cursor: text;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 700; padding: 2px 8px;
   border-radius: 6px; background: var(--soft); color: var(--brandText);
 }
+/* Tooltip con el hash: aparece con hover (escritorio) o al tocar (móvil, gracias a tabIndex) */
+.commit__tag::after {
+  content: attr(data-hash); position: absolute; bottom: calc(100% + 6px); left: 50%;
+  transform: translateX(-50%); padding: 3px 8px; border-radius: 6px; white-space: nowrap;
+  background: var(--text); color: var(--bg); font-size: 11px;
+  opacity: 0; pointer-events: none; transition: opacity .15s;
+}
+.commit__tag:hover::after, .commit__tag:focus::after { opacity: 1; }
 .studies { padding: 24px 28px; display: flex; flex-direction: column; gap: 12px; }
 .studies__cmd { font-size: 14px; color: var(--brandText); font-weight: 700; }
 .studies__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
@@ -108,7 +122,12 @@
 .contact { border-top: 1px solid var(--line); }
 .contact__inner { max-width: 1100px; display: flex; flex-direction: column; gap: 34px; align-items: center; text-align: center; }
 .contact__text { margin: 14px auto 0; max-width: 560px; color: var(--muted); font-size: 18px; line-height: 1.6; }
-.contact__grid { width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; text-align: left; }
+.contact__body { width: 100%; display: grid; grid-template-columns: minmax(260px, 380px) 1fr; gap: 24px; align-items: start; text-align: left; }
+.contact__info { display: flex; flex-direction: column; gap: 16px; }
+@media (max-width: 900px) {
+  .contact__body { grid-template-columns: 1fr; }
+  .contact__form-wrap { order: -1; }
+}
 .contact-card { display: flex; align-items: center; gap: 16px; padding: 20px 22px; text-decoration: none; color: var(--text); width: 100%; }
 .contact-card:hover { color: var(--text); }
 .contact-card__title { display: block; font-weight: 700; }
@@ -120,4 +139,19 @@
   .stats { grid-template-columns: 1fr; }
   .projects__grid { grid-template-columns: 1fr; }
   .building__bubble { right: -40px; }
+  /* Móvil: etiqueta arriba y mensaje debajo, todos alineados a la izquierda */
+  .commit { flex-direction: column; gap: 4px; }
 }
+
+.contact-form { width: 100%; padding: 24px; display: flex; flex-direction: column; gap: 14px; text-align: left; }
+.contact-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.contact-form input, .contact-form textarea {
+  width: 100%; padding: 12px 14px; border-radius: 12px; border: 2px solid var(--line);
+  background: var(--bg); color: var(--text); font: inherit; resize: vertical;
+}
+.contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--brand); }
+.contact-form button { align-self: flex-start; cursor: pointer; }
+.contact-form__status { margin: 0; min-height: 1.4em; font-size: 14px; color: var(--brandText); }
+.contact-form__status--warn { color: var(--muted); }
+.contact-form__trap { display: none; }
+@media (max-width: 560px) { .contact-form__row { grid-template-columns: 1fr; } }

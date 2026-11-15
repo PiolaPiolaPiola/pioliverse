@@ -62,12 +62,14 @@ export const es = {
     },
   },
   experience: {
-    label: '03 · git log --experiencia',
-    title: 'Mi historial de commits',
+    label: '03 · gh pr list --experiencia',
+    title: 'Mi historial de PRs',
     at: '@ Q10 S.A.S.',
+    base: 'experiencia',
     jobs: [
       {
-        hash: 'a3f9c21',
+        pr: 3,
+        branch: 'rol/desarrolladora-software',
         head: true,
         period: 'mar 2024 – ago 2026',
         role: 'Desarrolladora de Software',
@@ -84,7 +86,8 @@ export const es = {
         ],
       },
       {
-        hash: '7be1d04',
+        pr: 2,
+        branch: 'rol/analista-qa',
         head: false,
         period: 'dic 2023 – mar 2024',
         role: 'Analista de Pruebas (QA)',
@@ -94,7 +97,8 @@ export const es = {
         ],
       },
       {
-        hash: '2c88e10',
+        pr: 1,
+        branch: 'rol/gestion-humana-mercadeo',
         head: false,
         period: 'ago 2021 – dic 2023',
         role: 'Auxiliar de Gestión Humana & Mercadeo',
@@ -107,7 +111,7 @@ export const es = {
     studies: [
       { title: 'Ingeniería de Software', detail: 'Politécnico Grancolombiano · en curso' },
       { title: 'Diplomado: de la Arquitectura al Fullstack en producción', detail: 'Cedesistemas / Cetia · 113 h' },
-      { title: 'Inglés técnico B1', detail: 'EF' },
+      { title: 'Inglés técnico intermedio', detail: 'EF' },
     ],
   },
   projects: {
@@ -141,7 +145,19 @@ export const es = {
     title: '¿Hacemos merge?',
     text: 'Si tienes un reto backend, un equipo con buena energía o una idea por construir, escríbeme. Respondo más rápido que un pollito con café.',
     email: 'Correo',
-    phone: 'Teléfono / WhatsApp',
+    phone: 'WhatsApp',
+    phoneValue: 'Escríbeme por chat',
+    form: {
+      name: 'Tu nombre',
+      email: 'Tu correo',
+      message: '¿En qué estás pensando?',
+      send: 'Enviar mensaje',
+      sending: 'Enviando…',
+      ok: '¡Mensaje recibido! Te respondo pronto 🐥',
+      error: 'Algo falló. Intenta de nuevo o escríbeme por LinkedIn.',
+      invalid: 'Revisa los datos: un correo válido y un mensaje de al menos 10 caracteres.',
+      wait: 'Ya recibí tu mensaje. Espera unos segundos antes de enviar otro.',
+    },
     cv: 'Descargar mi CV (PDF)',
   },
   dreams: {

@@ -1,7 +1,7 @@
 .funfact { position: fixed; left: 0; top: 0; z-index: 40; pointer-events: none; }
 
 /* Recorre la pantalla de esquina a esquina sin salirse del viewport. */
-.funfact__drift { --w: 280px; --h: 140px; animation: drift 46s ease-in-out infinite; }
+.funfact__drift { --w: 280px; --h: 140px; animation: drift 75s ease-in-out infinite; }
 .funfact__drift:hover { animation-play-state: paused; }
 @keyframes drift {
   0%, 100% { transform: translate(4vw, 22vh); }
