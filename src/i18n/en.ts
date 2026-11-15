@@ -109,15 +109,18 @@ export const en: Dictionary = {
         ],
       },
     ],
-    studiesCmd: '$ git branch --education',
-    studies: [
-      { title: 'Software Engineering', detail: 'Politécnico Grancolombiano · in progress' },
-      { title: 'Diploma: From Architecture to Fullstack in production', detail: 'Cedesistemas / Cetia · 113 h' },
-      { title: 'Technical English B1 Intermediate', detail: 'EF' },
+  },
+  studies: {
+    label: '04 · git branch --education',
+    title: 'My education',
+    items: [
+      { branch: 'education/software-engineering', title: 'Software Engineering', detail: 'Politécnico Grancolombiano · in progress' },
+      { branch: 'education/fullstack-diploma', title: 'Diploma: From Architecture to Fullstack in production', detail: 'Cedesistemas / Cetia · 113 h' },
+      { branch: 'education/english', title: 'Technical English — Intermediate', detail: 'EF' },
     ],
   },
   projects: {
-    label: '04 · pioliverse_vaults',
+    label: '05 · pioliverse_vaults',
     title: 'Unlocked projects',
     progress: '1 / ∞ levels completed',
     level: 'LEVEL',
@@ -143,7 +146,7 @@ export const en: Dictionary = {
     },
   },
   contact: {
-    label: '05 · contact',
+    label: '06 · contact',
     title: "Shall we merge?",
     text: 'If you have a backend challenge, a team with good vibes or an idea to build, write to me. I reply faster than a chick on coffee.',
     email: 'Email',
@@ -159,6 +162,7 @@ export const en: Dictionary = {
       error: 'Something went wrong. Try again or reach me on LinkedIn.',
       invalid: 'Please check your details: a valid email and a message of at least 10 characters.',
       wait: 'I already got your message. Please wait a few seconds before sending another.',
+      hint: 'Only letters, numbers and common punctuation.',
     },
     cv: 'Download my CV (PDF)',
   },
@@ -170,6 +174,13 @@ export const en: Dictionary = {
   footer: {
     made: '© 2026 Pioliverse · made with love, coffee and AI',
     bye: 'return "thanks for visiting";',
+  },
+  toast: {
+    close: 'Close notice',
+  },
+  visitor: {
+    welcome: (n: number) => `Welcome to the Pioliverse! You are visitor #${n} 🐥`,
+    badge: (n: number) => `visitor #${n}`,
   },
   funFact: {
     title: 'Did you know?',

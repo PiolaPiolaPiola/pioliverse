@@ -8,8 +8,14 @@ import { Experience } from './components/sections/Experience';
 import { Hero } from './components/sections/Hero';
 import { Projects } from './components/sections/Projects';
 import { Stack } from './components/sections/Stack';
+import { Studies } from './components/sections/Studies';
+import { useSmoothAnchors } from './hooks/useSmoothAnchors';
+import { useVisitor } from './hooks/useVisitor';
 
 export default function App() {
+  useSmoothAnchors();
+  const visitor = useVisitor();
+
   return (
     <>
       <Navbar />
@@ -18,11 +24,12 @@ export default function App() {
         <About />
         <Stack />
         <Experience />
+        <Studies />
         <Projects />
         <Dreams />
         <Contact />
       </main>
-      <Footer />
+      <Footer visitor={visitor} />
       <FunFact />
     </>
   );

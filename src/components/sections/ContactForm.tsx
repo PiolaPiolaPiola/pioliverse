@@ -1,12 +1,20 @@
 import { useRef, useState, type FormEvent } from 'react';
 import { useLanguage } from '../../hooks/useLanguage';
+import { useToast } from '../../hooks/useToast';
 import { Card } from '../ui/Card';
 
-type Status = 'idle' | 'sending' | 'ok' | 'error' | 'invalid' | 'wait';
+type Status = 'idle' | 'sending' | 'error' | 'invalid' | 'wait';
+type Field = 'name' | 'email' | 'message';
 
 const LIMITS = { name: 80, email: 254, messageMin: 10, message: 2000 } as const;
 const COOLDOWN_MS = 30_000;
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/;
+
+const DISALLOWED: Record<Field, RegExp> = {
+  name: /[^\p{L}\p{M}\s'.-]/gu,
+  email: /[^A-Za-z0-9._%+@-]/g,
+  message: /[^\p{L}\p{M}\p{N}\s.,;:!?¡¿'"()\-_@#%&/+*=€$…—–°\p{Extended_Pictographic}]/gu,
+};
 
 function isInvisible(code: number) {
   return (
@@ -19,12 +27,16 @@ function isInvisible(code: number) {
   );
 }
 
-function sanitize(value: FormDataEntryValue | null, max: number, multiline = false) {
+function keepAllowed(text: string, field: Field) {
+  return text.replace(DISALLOWED[field], '');
+}
+
+function sanitize(value: FormDataEntryValue | null, field: Field, max: number) {
+  const multiline = field === 'message';
   const text = String(value ?? '')
     .normalize('NFKC')
     .replace(/\r\n?/g, '\n')
-    .replace(/<[^>]*>/g, '')
-    .replace(/[<>]/g, '');
+    .replace(/<[^>]*>/g, '');
 
   const visible = Array.from(text, (ch) => {
     const code = ch.codePointAt(0) ?? 0;
@@ -32,12 +44,29 @@ function sanitize(value: FormDataEntryValue | null, max: number, multiline = fal
     return isInvisible(code) ? (multiline ? '' : ' ') : ch;
   }).join('');
 
-  const collapsed = multiline ? visible.replace(/\n{3,}/g, '\n\n') : visible.replace(/\s+/g, ' ');
+  const allowed = keepAllowed(visible, field);
+  const collapsed = multiline ? allowed.replace(/\n{3,}/g, '\n\n') : allowed.replace(/\s+/g, ' ');
   return collapsed.trim().slice(0, max);
+}
+
+function filterWhileTyping(e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) {
+  const el = e.currentTarget;
+  const clean = keepAllowed(el.value, el.name as Field);
+  if (clean === el.value) return;
+
+  const removed = el.value.length - clean.length;
+  const caret = Math.max(0, (el.selectionStart ?? clean.length) - removed);
+  el.value = clean;
+  try {
+    el.setSelectionRange(caret, caret);
+  } catch {
+    return;
+  }
 }
 
 export function ContactForm() {
   const { t } = useLanguage();
+  const { showToast } = useToast();
   const [status, setStatus] = useState<Status>('idle');
   const lastSentAt = useRef(0);
 
@@ -50,7 +79,7 @@ export function ContactForm() {
 
     if (raw.get('botcheck')) {
       form.reset();
-      setStatus('ok');
+      showToast(t.contact.form.ok);
       return;
     }
 
@@ -59,9 +88,9 @@ export function ContactForm() {
       return;
     }
 
-    const name = sanitize(raw.get('name'), LIMITS.name);
-    const email = sanitize(raw.get('email'), LIMITS.email).toLowerCase();
-    const message = sanitize(raw.get('message'), LIMITS.message, true);
+    const name = sanitize(raw.get('name'), 'name', LIMITS.name);
+    const email = sanitize(raw.get('email'), 'email', LIMITS.email).toLowerCase();
+    const message = sanitize(raw.get('message'), 'message', LIMITS.message);
 
     if (!name || !EMAIL_RE.test(email) || message.length < LIMITS.messageMin) {
       setStatus('invalid');
@@ -93,14 +122,14 @@ export function ContactForm() {
       if (!res.ok || !json.success) throw new Error('send failed');
       lastSentAt.current = Date.now();
       form.reset();
-      setStatus('ok');
+      setStatus('idle');
+      showToast(t.contact.form.ok);
     } catch {
       setStatus('error');
     }
   }
 
   const feedback: Partial<Record<Status, string>> = {
-    ok: t.contact.form.ok,
     error: t.contact.form.error,
     invalid: t.contact.form.invalid,
     wait: t.contact.form.wait,
@@ -118,6 +147,7 @@ export function ContactForm() {
           autoComplete="name"
           placeholder={t.contact.form.name}
           aria-label={t.contact.form.name}
+          onInput={filterWhileTyping}
         />
         <input
           name="email"
@@ -127,6 +157,7 @@ export function ContactForm() {
           autoComplete="email"
           placeholder={t.contact.form.email}
           aria-label={t.contact.form.email}
+          onInput={filterWhileTyping}
         />
       </div>
       <textarea
@@ -137,13 +168,18 @@ export function ContactForm() {
         maxLength={LIMITS.message}
         placeholder={t.contact.form.message}
         aria-label={t.contact.form.message}
+        aria-describedby="contact-form-hint"
+        onInput={filterWhileTyping}
       />
+      <span id="contact-form-hint" className="contact-form__hint">
+        {t.contact.form.hint}
+      </span>
 
       <button type="submit" className="btn btn--primary" disabled={status === 'sending'}>
         {status === 'sending' ? t.contact.form.sending : t.contact.form.send}
       </button>
 
-      <p role="status" className={`contact-form__status${status === 'ok' ? '' : ' contact-form__status--warn'}`}>
+      <p role="status" className="contact-form__status">
         {feedback[status]}
       </p>
     </Card>

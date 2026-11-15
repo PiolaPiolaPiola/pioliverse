@@ -46,7 +46,7 @@
 
 /* ===== Base ===== */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+html { scroll-padding-top: 80px; }
 body {
   margin: 0;
   background: var(--bg);
@@ -92,5 +92,4 @@ a:hover { color: var(--text); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
-  html { scroll-behavior: auto; }
 }

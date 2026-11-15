@@ -65,20 +65,6 @@ export function Experience() {
             </Reveal>
           ))}
         </div>
-
-        <Reveal>
-          <Card className="studies">
-            <div className="mono studies__cmd">{t.experience.studiesCmd}</div>
-            <div className="studies__grid">
-              {t.experience.studies.map((s) => (
-                <div key={s.title}>
-                  <div style={{ fontWeight: 700 }}>{s.title}</div>
-                  <div className="muted" style={{ fontSize: 15 }}>{s.detail}</div>
-                </div>
-              ))}
-            </div>
-          </Card>
-        </Reveal>
       </div>
     </section>
   );
