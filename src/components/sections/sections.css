@@ -56,8 +56,8 @@
 /* ===== Stack ===== */
 .stack { padding: 110px 0 90px; }
 .stack__inner { display: flex; flex-direction: column; gap: 40px; }
-.stack__grid { --cols: 3; display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 20px; }
-.stack__grid > * { flex: 0 0 calc((100% - 20px * (var(--cols) - 1)) / var(--cols)); min-width: 0; }
+.stack__grid { position: relative; display: flex; flex-wrap: wrap; gap: 20px; }
+.stack__grid > * { flex: 1 1 280px; min-width: 0; }
 .stack__card { padding: 24px; display: flex; flex-direction: column; gap: 16px; width: 100%; }
 .stack__card-head { display: flex; align-items: center; justify-content: space-between; }
 .stack__card-head h3 { margin: 0; font-size: 24px; font-weight: 600; }
